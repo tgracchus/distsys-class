@@ -1044,7 +1044,7 @@ https://en.wikipedia.org/wiki/Successive_over-relaxation
   
 SAGA: Queue+Processing Job
 http://arnon.me/soa-patterns/saga/
-
+http://www.rgoarchitects.com/Files/SOAPatterns/Saga.pdf
 
 ### Independent domains
 
