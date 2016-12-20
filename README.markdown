@@ -1134,7 +1134,7 @@ http://arnon.me/soa-patterns/saga/
 - How do you handle it when a downstream service is unable to handle load?
   1. Consume resources and explode
   2. Shed load. Start dropping requests.
-  3. Reject requests. Ignore the work and tell clients it failed.
+  3. Reject requests. Ignore the work and tell clients it failed. (Fill up the pipe, and make the client to slow down organically, the client will detect it's full, so, do not add more, slow down myself) (Use bounded queue and trottling)
   4. Apply backpressure to clients, asking them to slow down.
 - 2-4 allow the system to catch up and recover
   - But backpressure reduces the volume of work that has to be retried
