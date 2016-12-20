@@ -1221,11 +1221,11 @@ http://www.rgoarchitects.com/Files/SOAPatterns/Saga.pdf
   - Additional instrumentation/deployment
 - Services can use good client libraries
   - That library might be "Open a socket" or an HTTP client
-    - Leverage HTTP headers!
+    - Leverage HTTP headers! (Accept: application/json + mycat v=6.2) etags
       - Accept headers for versioning
       - Lots of support for caching and proxying
     - Haproxy is an excellent router for both HTTP and TCP services
-  - Eventually, library might include mock IO
+  - Eventually, library might include mock IO (Add a random error trown)
     - Service team is responsible for testing that the service provides an API
     - When the API is known to be stable, every client can *assume* it works
     - Removes the need for network calls in test suites
