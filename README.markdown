@@ -994,7 +994,7 @@ than the *transformations*.
     - Spares tend to fail when becoming active
     - Active-active wherever possible
       - Predictability over efficiency
-  - Also not a huge fan of only having 2 copies
+  - Also not a huge fan of only having 2 copies (Reconciliation loops)
     - Node failure probabilities just too high
     - OK for not-important data
     - I generally want three copies of data
@@ -1010,7 +1010,7 @@ than the *transformations*.
 - Redundancy improves availability so long as failures are uncorrelated
   - Failures are not uncorrelated
     - Disks from the same batch failing at the same time
-    - Same-rack nodes failing when the top-of-rack switch blows
+    - Same-rack nodes failing when the top-of-rack switch blowstp
     - Same-DC nodes failing when the UPS blows
     - See entire EC2 AZ failures
     - Running the same bad computation on every node will break every node
@@ -1018,7 +1018,7 @@ than the *transformations*.
       - Riak list-keys
       - Cassandra doomstones
     - Cascading failures
-      - Thundering-herd
+      - Thundering-herd (Redicted load to another nodes, but, every node reroutes it whith independendent decisions. So, for example when using a shared cache, some nodes decides node x is bad, and some other y. So, we endup with a group writing to x and other group writing to y. So data is duplicated, and will end up with one copy per cache node (destroying the sharding and the cache)
       - TCP incast
 
 ### Sharding
