@@ -984,7 +984,7 @@ than the *transformations*.
       - Distributed DB did its job correctly, but you told it to delete key
         data
 
-### Redundancy
+### Redundancy (Reconciliation loops)
 
 - OK, so failure is less of an option
 - Want to *reduce the probability of failure*
@@ -1013,7 +1013,7 @@ than the *transformations*.
     - Same-rack nodes failing when the top-of-rack switch blowstp
     - Same-DC nodes failing when the UPS blows
     - See entire EC2 AZ failures
-    - Running the same bad computation on every node will break every node
+    - Running the same bad computation on every node will break every node (Will kill the entering cluster if the query is not stopped) 
       - Expensive queries
       - Riak list-keys
       - Cassandra doomstones
@@ -1025,7 +1025,7 @@ than the *transformations*.
 
 - The problem is too big
 - Break the problem into parts small enough to fit on a node
-  - Not too small: small parts => high overhead
+  - Not too small: small parts => high overhead (datafile in servers might we half empty, so recovering data usually means making a lot of seek and read by the disk or just to take a look at a lot of files)
   - Not too big: need to rebalance work units gradually from node to node
   - Somewhere around 10-100 work units/node is ideal, IMO
 - Ideal: work units of equal size
@@ -1033,9 +1033,9 @@ than the *transformations*.
   - Beware changing workloads with time
 - Know your bounds in advance
   - How big can a single part get before overwhelming a node?
-  - How do we enforce that limit *before* it sinks a node in prod?
+  - How do we enforce that limit *before* it sinks a node in prod? (try to pin a client(or big data chunk) to a certain capacity, for example two shards)
     - Then sinks all the other nodes, one by one, as the system rebalances
-- Allocating shards to nodes
+- Allocating shards to nodes (Ordasity https://github.com/boundary/ordasity)
   - Often built in to DB
   - Good candidate for ZK, Etcd, and so on
   - See Boundary's Ordasity
@@ -1433,3 +1433,8 @@ special care.
 ## Further reading
 
 - http://www.rgoarchitects.com/Files/fallacies.pdf
+
+
+aphyr@jepsen.io
+
+http://jepsen.io/
