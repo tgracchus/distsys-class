@@ -1295,7 +1295,7 @@ hand-in-hand with teams.
     - Disk latency
     - Network latency
     - GC latency
-    - Queue latency
+    - Queue latency (Add a timestamp at the beggining, at a timestap at the end, calculate difference)
   - Try to localize problem using application-level metrics
     - Then dig in to process and OS performance
 
