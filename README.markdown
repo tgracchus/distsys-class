@@ -1390,7 +1390,7 @@ hand-in-hand with teams.
   - Consider shadowing traffic in prod and comparing old/new versions
     - Good way to determine if new code is faster & correct
 
-### Feature flags
+### Feature flags (shitch them off if they are not configurable, and fail to cheapest option)
 
 - We want incremental rollouts of a changeset after a deploy
   - Introduce features one by one to watch their impact on metrics
