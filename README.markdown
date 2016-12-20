@@ -966,7 +966,7 @@ than the *transformations*.
   - Can we pay someone to fix it?
   - Could insurance cover the damage?
   - Could we just call the customer and apologize?
-- Sounds silly, but may be much cheaper
+- Sounds silly, but m ay be much cheaper
   - We can never prevent 100% of system failures
   - Consciously choosing to recover *above* the level of the system
   - This is how financial companies and retailers do it!
@@ -984,8 +984,9 @@ than the *transformations*.
       - Distributed DB did its job correctly, but you told it to delete key
         data
 
-### Redundancy (Reconciliation loops)
-
+### Redundancy (Reconciliation loops SOR - Sorted Merge Equijoin and using https://en.wikipedia.org/wiki/Merkle_tree)
+https://en.wikipedia.org/wiki/Successive_over-relaxation
+ 
 - OK, so failure is less of an option
 - Want to *reduce the probability of failure*
 - Have the same state and same computation take place on several nodes
@@ -1039,6 +1040,11 @@ than the *transformations*.
   - Often built in to DB
   - Good candidate for ZK, Etcd, and so on
   - See Boundary's Ordasity
+  
+  
+SAGA: Queue+Processing Job
+http://arnon.me/soa-patterns/saga/
+
 
 ### Independent domains
 
@@ -1052,6 +1058,7 @@ than the *transformations*.
   - Flake IDs: generate globally unique identifiers locally
   - Partial availability: users can still use some parts of the system
   - Processing a queue: more consumers reduces the impact of expensive events
+  (Little’s Law https://en.wikipedia.org/wiki/Little's_law)
 
 ### ID structure
 
@@ -1068,13 +1075,13 @@ than the *transformations*.
   - SaaS app: object ID can also encode customer ID
   - Twitter: tweet ID can encode user ID
 
-### Immutable values
+### Immutable values 
 
 - Data that never changes is trivial to store
-  - Never requires coordination
+  - Never requires coordination (Only at the writing monent, not require consensus)
   - Cheap replication and recovery
   - Minimal repacking on disk
-- Useful for Cassandra, Riak, any LSM-tree DB.
+- Useful for Cassandra, Riak, any LSM-tree DB. (https://en.wikipedia.org/wiki/Log-structured_merge-tree)
   - Or for logs like Kafka!
 - Easy to reason about: either present or it's not
   - Eliminates all kinds of transactional headaches
@@ -1082,19 +1089,19 @@ than the *transformations*.
 - Extremely high availability and durability, tunable write latency
   - Low read latencies: can respond from closest replica
   - Especially valuable for geographic distribution
-- Requires garbage collection!
+- Requires garbage collection! (Garbage collectoin algorithms)
   - But there are good ways to do this
 
 ### Mutable identities
 
-- Pointers to immutable values
+- Pointers to immutable values (ID -> identity (refence) -> value )) ()
 - Pointers are small! Only metadata!
   - Can fit huge numbers of pointers on a small DB
-  - Good candidate for consensus services or relational DBs
+  - Good candidate for consensus services or relational DBs (store identity in relational)
 - And typically, not many pointers in the system
-  - Your entire DB could be represented by a single pointer
+  - Your entire DB could be represented by a single pointer (https://en.wikipedia.org/wiki/Hash_array_mapped_trie)
   - Datomic only has ~5 identities
-- Strongly consistent operations over identities can be *backed* by immutable
+- Strongly consistent operations over identities can be *backed* by immutable (the values are here)
   HA storage
   - Take advantage of AP storage latencies and scale
   - Take advantage of strong consistency over small datasets provided by
