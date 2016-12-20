@@ -1275,7 +1275,7 @@ hand-in-hand with teams.
   - Be able to simulate an entire cluster in-process
   - Control concurrent interleavings with simulated networks
   - Automated hardware faults
-- Testing distributed systems is much, much harder than testing local ones
+- Testing distributed systems is much, much harder than testing local ones (https://queue.acm.org/detail.cfm?id=2889274)
   - Huge swath of failure modes you've never even heard of
   - Combinatorial state spaces
   - Bugs can manifest only for small/large/intermediate time/space/concurrency
@@ -1284,7 +1284,7 @@ hand-in-hand with teams.
 
 - Jeff Hodges: The worst bug you'll ever hear is "it's slow"
   - Happens all the time, really difficult to localize
-  - Because the system is distributed, have to profile multiple nodes
+  - Because the system is distributed, have to profile multiple nodes 
     - Not many profilers are built for this
     - Sigelman et al, 2010: Dapper, a Large-Scale Distributed Systems Tracing
       Infrastructure
